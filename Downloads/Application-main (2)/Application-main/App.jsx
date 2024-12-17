@@ -1,29 +1,24 @@
-import React, { useState } from 'react';
-import ToDoList from './ToDoList'; 
-import ToDoForm from './ToDoForm'; // Import ToDoForm
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/native-stack';
+
+// Import screens
+import HomeScreen from './src/screens/HomeScreen';
+import AboutScreen from './src/screens/AboutScreen';
+
+// Create the Stack Navigator
+const Stack = createStackNavigator();
 
 function App() {
-  // Define state for tasks
-  const [tasks, setTasks] = useState(['Do laundry', 'Go to gym', 'Walk dog']);
-
-  // Function to add a new task
-  const addTask = (taskText) => {
-    if (taskText && !tasks.includes(taskText)) { // Prevent duplicates and empty tasks
-      setTasks([...tasks, taskText]);
-    }
-  };
-
   return (
-    <div>
-      <h1>My To-Do List</h1>
-      {/* Pass tasks and addTask function */}
-      <ToDoForm addTask={addTask} />
-      <ToDoList tasks={tasks} />
-    </div>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default App;
-
-
-
